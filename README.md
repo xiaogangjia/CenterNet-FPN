@@ -7,9 +7,11 @@ C2, C3, C4 to predict. In addition, I adopt the training trick in SNIP and Tride
 different scales are assigned to C2, C3 and C4 respectively.
 
 
-| Model               | resolution    |  AP  |
+| Model               | resolution  |  AP  |
 | --------            | :-------:   | :----: |
-| resnet18-fpn        | 384      |   72.46    |
-| resnet18-fpn        | 384      |   74.97    |
-| resnet101-fpn       | 384      |   79.16    |
+| resnet18-dcn        | 384      |   72.6    |
+| resnet101-dcn       | 384      |   77.1    |
+| resnet18-fpn        | 384      |   72.46   |
+| resnet18-fpn        | 384      |   74.97   |
+| resnet101-fpn       | 384      |   79.16   |
 

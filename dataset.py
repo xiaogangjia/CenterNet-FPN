@@ -125,3 +125,42 @@ class VOC_data(Dataset):
 
     def __len__(self):
         return len(self.img_names)
+
+
+class test_data(Dataset):
+    def __init__(self, img_dict, data_dir, img_size=(384, 384), if_flip_test=True):
+        self.img_label = img_dict
+        self.img_names = list(img_dict.keys())
+        self.img_dir = data_dir
+        self.img_size = img_size
+        self.flip_flag = if_flip_test
+        self.mean = np.array([0.485, 0.456, 0.406], dtype=np.float32).reshape(1, 1, 3)
+        self.std = np.array([0.229, 0.224, 0.225], dtype=np.float32).reshape(1, 1, 3)
+
+    def __getitem__(self, index):
+        img_name = self.img_names[index]
+        detection = np.array(self.img_label[img_name])
+        image = cv2.imread(self.img_dir + img_name + '.jpg')
+        # image = cv2.imread(cfg['2012_dir'] + img_name + '.jpg')
+        # if image is None:
+        #    image = cv2.imread(cfg['2007_dir'] + img_name + '.jpg')
+
+        image, detection = _resize_image(image, detection, [384, 384])
+        image = image.astype(np.float32) / 255.
+        normalize_(image, self.mean, self.std)
+        image = image.transpose((2, 0, 1))
+
+        if self.flip_flag:
+            #image = np.concatenate((image, image[:, :, ::-1]), axis=0)
+            flip_image = image[:, :, ::-1].copy()
+            flip_image = torch.from_numpy(flip_image)
+
+        image = torch.from_numpy(image)
+
+        if self.flip_flag:
+            return image, flip_image, img_name
+        else:
+            return image, img_name
+
+    def __len__(self):
+        return len(self.img_names)
