@@ -11,7 +11,7 @@ different scales are assigned to C2, C3 and C4 respectively.
 | --------            | :-------:   | :----: |
 | resnet18-dcn        | 384      |   72.6    |
 | resnet101-dcn       | 384      |   77.1    |
-| resnet18-fpn        | 384      |   72.46   |
-| resnet18-fpn        | 384      |   74.97   |
-| resnet101-fpn       | 384      |   79.16   |
+| resnet18-fpn-c2        | 384      |   72.46   |
+| resnet18-fpn-multi        | 384      |   74.97   |
+| resnet101-fpn-multi       | 384      |   79.16   |
 
